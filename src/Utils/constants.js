@@ -1,11 +1,27 @@
-export const userType = {
+const userTypes = {
     normal : "Normal",
     admin : "Admin"
 }
 
-export const requestStatus = {
+const requestStatus = {
     pending : "Pending",
     approved : "Approved",
     declined : "Declined",
-    finished : "Finished"
+    nil : "Nil"
+}
+
+const bookTags = {
+    fantasy : "Fantasy",
+    comedy : "Comedy",
+    horror : "Horror",
+    biography : "Biography",
+    nonFictional : "Non-Fictional",
+    fictional : "Fictional",
+    bestSeller : "Best-Seller"
+}
+
+module.exports = {
+    userTypes,
+    requestStatus,
+    bookTags
 }

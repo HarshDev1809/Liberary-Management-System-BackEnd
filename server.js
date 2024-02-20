@@ -14,6 +14,8 @@ mongoose.connect(DB_URL).then(()=>{
 });
 
 app.use(bodyParser.json());
+require("./src/Routes/auth.route")(app);
+require("./src/Routes/books.route")(app);
 
 
 app.listen(PORT,()=>{

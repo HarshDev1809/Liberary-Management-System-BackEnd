@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { userType, requestStatus } = require("../Utils/constants");
+const { userTypes, requestStatus } = require("../Utils/constants");
 
 const employeeSchema = mongoose.Schema({
   name: {
@@ -26,22 +26,16 @@ const employeeSchema = mongoose.Schema({
   userType: {
     type: String,
     require: true,
-    default: userType.normal,
-    enum: userType,
+    default: userTypes.normal,
+    enum: userTypes,
   },
 
   requestStatus: {
     type: String,
     require: true,
-    default: requestStatus.pending,
+    default: requestStatus.nil,
     enum: requestStatus,
   },
-
-  userNotification: {
-    type: [mongoose.Schema.ObjectId],
-    require: true,
-    default: [],
-  }
   
 });
 
