@@ -36,11 +36,17 @@ const bookSchema = mongoose.Schema({
         require : true,
         default : "https://www.pngitem.com/pimgs/m/665-6651267_book-logo-png-book-logo-png-hd-transparent.png"
     },
-    // bookCount : {
-    //     type : Number,
-    //     require : true,
-    //     default : 1
-    // }
+    bookCount : {
+        type : Number,
+        require : true,
+        default : 1
+    },
+    issuedTo : {
+        type:[mongoose.SchemaTypes.ObjectId],
+        require : true,
+        ref : "LMSCustomerDataBase",
+        default : []
+        }
 })
 
 const Book = mongoose.model("LMSBooksDataBase",bookSchema);

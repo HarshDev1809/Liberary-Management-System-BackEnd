@@ -1,5 +1,4 @@
 const Employee = require("../Models/employee.model");
-const Notification = require("../Models/notification.model");
 const { userTypes, requestStatus } = require("../Utils/constants");
 const {
   errMessage,

@@ -1,5 +1,4 @@
 const Employee = require("../Models/employee.model");
-const Notification = require("../Models/notification.model");
 const bcrypt = require("bcrypt");
 const { todayDate } = require("../Utils/date");
 const {

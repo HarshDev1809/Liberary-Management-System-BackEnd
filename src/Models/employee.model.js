@@ -4,7 +4,7 @@ const { userTypes, requestStatus } = require("../Utils/constants");
 const employeeSchema = mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    require: true,
   },
 
   userName: {
