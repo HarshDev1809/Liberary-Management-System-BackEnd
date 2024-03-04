@@ -42,6 +42,7 @@ const verifyCustomerQuery = async(req,res,next)=>{
         query.emailId = emailId;
     }
     req.newQuery = query;
+    next();
 }
 module.exports = {
     verifyCustomer,

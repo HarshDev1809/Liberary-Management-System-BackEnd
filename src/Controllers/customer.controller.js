@@ -71,3 +71,17 @@ exports.issueBook = async(req,res)=>{
         return res.status(500).send(errMessage);
     }
 }
+
+exports.getCustomerById = async(req,res) => {
+    const customerId = req.params.id;
+    try{
+        const customer = await Customer.findById(customerId);
+        if(!customer){
+            return res.status(400).send({message : "Customer Not Found!"});
+        }else{
+            return res.status(200).send(customer);
+        }
+    }catch(err){
+        return res.status(500).send(errMessage);
+    }
+}
