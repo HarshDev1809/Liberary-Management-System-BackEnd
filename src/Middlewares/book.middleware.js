@@ -123,9 +123,26 @@ const verifyUpdateQuery = (req,res,next)=>{
     }
 }
 
+const findBook = async(req,res,next)=>{
+  const {bookId} = req.body;
+
+  try{
+    const response = await Book.find({uId : bookId});
+    if(!response.length){
+      return res.status(400).send({message : "Book not Found!"});
+    }else{
+      req.book = response[0];
+      next();
+    }
+  }catch(err){
+    return res.status(500).send(errMessage);
+  }
+}
+
 module.exports = {
   verifyBook,
   verifyPriceQuery,
   verifyQuery,
-  verifyUpdateQuery
+  verifyUpdateQuery,
+  findBook
 };

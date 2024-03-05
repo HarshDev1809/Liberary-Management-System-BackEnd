@@ -44,7 +44,24 @@ const verifyCustomerQuery = async(req,res,next)=>{
     req.newQuery = query;
     next();
 }
+
+const findCustomer = async(req,res,next) =>{
+    const {customerId} = req.body;
+    try{
+        const response = await Customer.find({uId : customerId});
+        if(!response.length){
+            return res.status(400).send({message : "Customer Not Found!"});
+        }else{
+            req.customer = response[0];
+            next();
+        }
+    }catch(err){
+        return res.status(500).send(errMessage);
+    }
+}
+
 module.exports = {
     verifyCustomer,
-    verifyCustomerQuery
+    verifyCustomerQuery,
+    findCustomer
 }

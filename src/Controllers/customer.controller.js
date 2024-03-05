@@ -40,12 +40,42 @@ exports.getCustomer = async(req,res)=>{
     }
 }
 
+// exports.issueBook = async(req,res)=>{
+//     const {issueDate, returnDate} = req.body;
+//     const customer = req.customer;
+//     const customerId = customer.uId;
+//     const book = req.book;
+//     const bookId = book.UId;
+
+//     try{
+//         const newIssueBook = new IssuedBookInfo({
+//             customerId : customer.uId,
+//             uId : book.uId,
+//             issueDate : issueDate,
+//             returnDate : returnDate,
+//         });
+
+//         const response = await newIssueBook.save();
+//         let updatedIssuedList = book.issuedTo;
+//         console.log(updatedIssuedList)
+//         updatedIssuedList = updatedIssuedList.push(customer._id);
+//         const updatedIssueListCustomer = customer.booksIssued.push(response._id);
+
+//         await Book.findOneAndUpdate({uId : bookId},{issuedTo : updatedIssuedList}, {new : true})
+//         await Customer.findOneAndUpdate({uId : customerId},{booksIssued : updatedIssueListCustomer},{new:true});
+//         return res.status(201).send(response);
+
+//     }catch(err){
+//         console.log(err);
+//         return res.status(500).send(errMessage);
+//     }
+//}
+
 exports.issueBook = async(req,res)=>{
     const {issueDate, returnDate} = req.body;
     const customer = req.customer;
     const customerId = customer.uId;
     const book = req.book;
-    const employeeId = req.user._id
     const bookId = book.UId;
 
     try{
@@ -54,16 +84,21 @@ exports.issueBook = async(req,res)=>{
             uId : book.uId,
             issueDate : issueDate,
             returnDate : returnDate,
-            fine : 0,
-            issuedBy : employeeId
         });
 
         const response = await newIssueBook.save();
-        const updatedIssuedList = book.issuedTo.push(customer._id);
-        const updatedIssueListCustomer = customer.booksIssued.push(response._id);
+        customer.booksIssued.push(response._id);
+        book.issuedTo.push(customer._id);
 
-        await Book.finOneAndUpdate({uId : bookId},{issuedTo : updatedIssuedList}, {new : true})
-        await Customer.finOneAndUpdate({uId : customerId},{booksIssued : updatedIssueListCustomer},{new:true});
+        await customer.save()
+        await book.save();
+        // let updatedIssuedList = book.issuedTo;
+        // console.log(updatedIssuedList)
+        // updatedIssuedList = updatedIssuedList.push(customer._id);
+        // const updatedIssueListCustomer = customer.booksIssued.push(response._id);
+
+        // await Book.findOneAndUpdate({uId : bookId},{issuedTo : updatedIssuedList}, {new : true})
+        // await Customer.findOneAndUpdate({uId : customerId},{booksIssued : updatedIssueListCustomer},{new:true});
         return res.status(201).send(response);
 
     }catch(err){

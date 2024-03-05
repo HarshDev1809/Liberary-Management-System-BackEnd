@@ -22,17 +22,11 @@ const issuedBookInfoSchema = mongoose.Schema({
         require : true
     },
 
-    fine : {
-        type : Number,
-        require : true,
-        default : 5
-    },
-
-    issuedBy : {
-        type : String,
-        rquire : true,
-        default : ""
-    }
+    // fine : {
+    //     type : Number,
+    //     require : true,
+    //     default : 5
+    // }
 })
 
 const IssuedBookInfo = mongoose.model("LMSIssuedBookData",issuedBookInfoSchema);
