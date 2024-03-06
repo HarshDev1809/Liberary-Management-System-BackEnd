@@ -65,10 +65,10 @@ exports.getBookById = async (req, res) => {
 };
 
 exports.updateBookDetails = async (req, res) => {
-  const query = req.newQuery;
+  const query = req.params.id;
   const newUpdate = req.body;
   try {
-    const response = await Book.findOneAndUpdate(query, newUpdate, {
+    const response = await Book.findOneAndUpdate({_id : query}, newUpdate, {
       new: true,
     });
     if (!response) {
